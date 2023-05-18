@@ -1,41 +1,12 @@
---- 
-title: "A Minimal Book Example"
-author: "John Doe"
+---
+title: "Introduction to R (Basic - Intermediate)"
+author: "Abraham Azar (abraham.azar@impact-initiatives.org)"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
 link-citations: yes
 github-repo: rstudio/bookdown-demo
----
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
-
-<!--chapter:end:index.Rmd-->
-
----
-title: "Introduction to R (Basic - Intermediate)"
-author: "Abraham Azar (abraham.azar@impact-initiatives.org)"
-output:
-  rmdformats::downcute:
-    downcute_theme: "chaos"
-    self_contained: true
-    thumbnails: true
-    lightbox: true
-    gallery: false
-    highlight: tango
-    use_bookdown: true
 ---
 ```{r warning=FALSE, include=FALSE}
 library(downloadthis)
@@ -1485,5 +1456,5 @@ If you are interested to even take it to another level of self learning R, <a hr
 
 Once installed, go to console and write `swirl()` and begin your learning journey. 
 
-<!--chapter:end:01-intro.Rmd-->
+<!--chapter:end:index.Rmd-->
 

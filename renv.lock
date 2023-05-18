@@ -1010,19 +1010,6 @@
       ],
       "Hash": "493df4ae51e2e984952ea4d5c75786a3"
     },
-    "rmdformats": {
-      "Package": "rmdformats",
-      "Version": "1.0.4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "bookdown",
-        "htmltools",
-        "knitr",
-        "rmarkdown"
-      ],
-      "Hash": "aa65206cf3a649096a20b81d98b06f96"
-    },
     "rprojroot": {
       "Package": "rprojroot",
       "Version": "2.0.3",
