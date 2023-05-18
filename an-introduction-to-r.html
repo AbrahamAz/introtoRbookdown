@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Introduction to R (Basic - Intermediate)</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Introduction to R (Basic - Intermediate)" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Introduction to R (Basic - Intermediate)" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Abraham Azar (abraham.azar@impact-initiatives.org)" />
+
+
+<meta name="date" content="2023-05-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="setup-instruction.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.27/datatables.js"></script>
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="libs/font-awesome-5.13.0/js/script.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="an-introduction-to-r.html"><a href="an-introduction-to-r.html"><i class="fa fa-check"></i><b>1</b> An Introduction to R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="an-introduction-to-r.html"><a href="an-introduction-to-r.html#course-introduction"><i class="fa fa-check"></i><b>1.1</b> Course Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="an-introduction-to-r.html"><a href="an-introduction-to-r.html#faq"><i class="fa fa-check"></i><b>1.2</b> FAQ</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="an-introduction-to-r.html"><a href="an-introduction-to-r.html#what-is-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> What is RStudio?</a></li>
+<li class="chapter" data-level="1.2.2" data-path="an-introduction-to-r.html"><a href="an-introduction-to-r.html#what-versions-of-r-is-rstudio-compatible-with"><i class="fa fa-check"></i><b>1.2.2</b> What versions of R is RStudio compatible with?</a></li>
+<li class="chapter" data-level="1.2.3" data-path="an-introduction-to-r.html"><a href="an-introduction-to-r.html#what-is-the-difference-between-rstudio-desktop-rstudio-server-and-rstudio-workbench"><i class="fa fa-check"></i><b>1.2.3</b> What is the difference between RStudio Desktop, RStudio Server, and RStudio Workbench?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="setup-instruction.html"><a href="setup-instruction.html"><i class="fa fa-check"></i><b>2</b> Setup Instruction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setup-instruction.html"><a href="setup-instruction.html#core-software"><i class="fa fa-check"></i><b>2.1</b> Core Software</a></li>
+<li class="chapter" data-level="2.2" data-path="setup-instruction.html"><a href="setup-instruction.html#rstudio-interface"><i class="fa fa-check"></i><b>2.2</b> RStudio Interface</a></li>
+<li class="chapter" data-level="2.3" data-path="setup-instruction.html"><a href="setup-instruction.html#installing-first-package"><i class="fa fa-check"></i><b>2.3</b> Installing first package</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tips-before-starting-our-journey.html"><a href="tips-before-starting-our-journey.html"><i class="fa fa-check"></i><b>3</b> Tips before starting our journey</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tips-before-starting-our-journey.html"><a href="tips-before-starting-our-journey.html#rstudio-projects"><i class="fa fa-check"></i><b>3.1</b> RStudio Projects</a></li>
+<li class="chapter" data-level="3.2" data-path="tips-before-starting-our-journey.html"><a href="tips-before-starting-our-journey.html#r-scripts"><i class="fa fa-check"></i><b>3.2</b> R Scripts</a></li>
+<li class="chapter" data-level="3.3" data-path="tips-before-starting-our-journey.html"><a href="tips-before-starting-our-journey.html#good-layouts"><i class="fa fa-check"></i><b>3.3</b> Good Layouts</a></li>
+<li class="chapter" data-level="3.4" data-path="tips-before-starting-our-journey.html"><a href="tips-before-starting-our-journey.html#write-readable-codes"><i class="fa fa-check"></i><b>3.4</b> Write readable codes</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="tips-before-starting-our-journey.html"><a href="tips-before-starting-our-journey.html#basic-formatting"><i class="fa fa-check"></i><b>3.4.1</b> Basic formatting</a></li>
+<li class="chapter" data-level="3.4.2" data-path="tips-before-starting-our-journey.html"><a href="tips-before-starting-our-journey.html#be-consistent"><i class="fa fa-check"></i><b>3.4.2</b> Be Consistent</a></li>
+<li class="chapter" data-level="3.4.3" data-path="tips-before-starting-our-journey.html"><a href="tips-before-starting-our-journey.html#the-most-important-include-comments"><i class="fa fa-check"></i><b>3.4.3</b> The most important: Include Comments</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="quiz-1-intro-to-r.html"><a href="quiz-1-intro-to-r.html"><i class="fa fa-check"></i><b>4</b> Quiz 1 (Intro to R)</a></li>
+<li class="chapter" data-level="5" data-path="basics-of-r.html"><a href="basics-of-r.html"><i class="fa fa-check"></i><b>5</b> Basics of R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="basics-of-r.html"><a href="basics-of-r.html#basic-data-types"><i class="fa fa-check"></i><b>5.1</b> Basic Data Types</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="basics-of-r.html"><a href="basics-of-r.html#numbers"><i class="fa fa-check"></i><b>5.1.1</b> Numbers</a></li>
+<li class="chapter" data-level="5.1.2" data-path="basics-of-r.html"><a href="basics-of-r.html#logical"><i class="fa fa-check"></i><b>5.1.2</b> Logical</a></li>
+<li class="chapter" data-level="5.1.3" data-path="basics-of-r.html"><a href="basics-of-r.html#characters"><i class="fa fa-check"></i><b>5.1.3</b> Characters</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="basics-of-r.html"><a href="basics-of-r.html#operators-in-r"><i class="fa fa-check"></i><b>5.2</b> Operators in R</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="basics-of-r.html"><a href="basics-of-r.html#arithmetic"><i class="fa fa-check"></i><b>5.2.1</b> Arithmetic</a></li>
+<li class="chapter" data-level="5.2.2" data-path="basics-of-r.html"><a href="basics-of-r.html#assignment"><i class="fa fa-check"></i><b>5.2.2</b> Assignment</a></li>
+<li class="chapter" data-level="5.2.3" data-path="basics-of-r.html"><a href="basics-of-r.html#comparison"><i class="fa fa-check"></i><b>5.2.3</b> Comparison</a></li>
+<li class="chapter" data-level="5.2.4" data-path="basics-of-r.html"><a href="basics-of-r.html#logical-1"><i class="fa fa-check"></i><b>5.2.4</b> Logical</a></li>
+<li class="chapter" data-level="5.2.5" data-path="basics-of-r.html"><a href="basics-of-r.html#miscellaneous"><i class="fa fa-check"></i><b>5.2.5</b> Miscellaneous</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="basics-of-r.html"><a href="basics-of-r.html#data-structures-in-r"><i class="fa fa-check"></i><b>5.3</b> Data Structures in R</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="basics-of-r.html"><a href="basics-of-r.html#variables"><i class="fa fa-check"></i><b>5.3.1</b> Variables</a></li>
+<li class="chapter" data-level="5.3.2" data-path="basics-of-r.html"><a href="basics-of-r.html#vectors"><i class="fa fa-check"></i><b>5.3.2</b> Vectors</a></li>
+<li class="chapter" data-level="5.3.3" data-path="basics-of-r.html"><a href="basics-of-r.html#factors"><i class="fa fa-check"></i><b>5.3.3</b> Factors</a></li>
+<li class="chapter" data-level="5.3.4" data-path="basics-of-r.html"><a href="basics-of-r.html#data-frames"><i class="fa fa-check"></i><b>5.3.4</b> Data frames</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="basics-of-r.html"><a href="basics-of-r.html#conditions-and-statements"><i class="fa fa-check"></i><b>5.4</b> Conditions and statements</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="basics-of-r.html"><a href="basics-of-r.html#if-statement"><i class="fa fa-check"></i><b>5.4.1</b> If Statement</a></li>
+<li class="chapter" data-level="5.4.2" data-path="basics-of-r.html"><a href="basics-of-r.html#else-if"><i class="fa fa-check"></i><b>5.4.2</b> Else If</a></li>
+<li class="chapter" data-level="5.4.3" data-path="basics-of-r.html"><a href="basics-of-r.html#if-else"><i class="fa fa-check"></i><b>5.4.3</b> If Else</a></li>
+<li class="chapter" data-level="5.4.4" data-path="basics-of-r.html"><a href="basics-of-r.html#use-of-and-or-or-in-if"><i class="fa fa-check"></i><b>5.4.4</b> Use of AND or OR in IF</a></li>
+<li class="chapter" data-level="5.4.5" data-path="basics-of-r.html"><a href="basics-of-r.html#for-loop"><i class="fa fa-check"></i><b>5.4.5</b> For Loop</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="quiz-2-basics-of-r.html"><a href="quiz-2-basics-of-r.html"><i class="fa fa-check"></i><b>6</b> Quiz 2 (Basics of R)</a></li>
+<li class="chapter" data-level="7" data-path="intermediate-level.html"><a href="intermediate-level.html"><i class="fa fa-check"></i><b>7</b> Intermediate level</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="intermediate-level.html"><a href="intermediate-level.html#data-to-be-used"><i class="fa fa-check"></i><b>7.0.1</b> Data to be used</a></li>
+<li class="chapter" data-level="7.1" data-path="intermediate-level.html"><a href="intermediate-level.html#r-packages"><i class="fa fa-check"></i><b>7.1</b> R Packages</a></li>
+<li class="chapter" data-level="7.2" data-path="intermediate-level.html"><a href="intermediate-level.html#dplyr"><i class="fa fa-check"></i><b>7.2</b> dplyr</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="intermediate-level.html"><a href="intermediate-level.html#what-is-dplyr"><i class="fa fa-check"></i><b>7.2.1</b> What is dplyr?</a></li>
+<li class="chapter" data-level="7.2.2" data-path="intermediate-level.html"><a href="intermediate-level.html#most-important-functions"><i class="fa fa-check"></i><b>7.2.2</b> Most important functions</a></li>
+<li class="chapter" data-level="7.2.3" data-path="intermediate-level.html"><a href="intermediate-level.html#pipes"><i class="fa fa-check"></i><b>7.2.3</b> Pipes</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="intermediate-level.html"><a href="intermediate-level.html#jump-to-action"><i class="fa fa-check"></i><b>7.3</b> Jump to action</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="intermediate-level.html"><a href="intermediate-level.html#select-function"><i class="fa fa-check"></i><b>7.3.1</b> <code>select()</code> function</a></li>
+<li class="chapter" data-level="7.3.2" data-path="intermediate-level.html"><a href="intermediate-level.html#filter-function"><i class="fa fa-check"></i><b>7.3.2</b> <code>filter()</code> function</a></li>
+<li class="chapter" data-level="7.3.3" data-path="intermediate-level.html"><a href="intermediate-level.html#arrange-function"><i class="fa fa-check"></i><b>7.3.3</b> <code>arrange()</code> function</a></li>
+<li class="chapter" data-level="7.3.4" data-path="intermediate-level.html"><a href="intermediate-level.html#mutate-function"><i class="fa fa-check"></i><b>7.3.4</b> <code>mutate()</code> function</a></li>
+<li class="chapter" data-level="7.3.5" data-path="intermediate-level.html"><a href="intermediate-level.html#summarise-function"><i class="fa fa-check"></i><b>7.3.5</b> <code>summarise()</code> function</a></li>
+<li class="chapter" data-level="7.3.6" data-path="intermediate-level.html"><a href="intermediate-level.html#group_by-function"><i class="fa fa-check"></i><b>7.3.6</b> <code>group_by()</code> function</a></li>
+<li class="chapter" data-level="7.3.7" data-path="intermediate-level.html"><a href="intermediate-level.html#join-function"><i class="fa fa-check"></i><b>7.3.7</b> <code>join()</code> function</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="final-push-exercisetest.html"><a href="final-push-exercisetest.html"><i class="fa fa-check"></i><b>8</b> Final Push (Exercise/Test)</a></li>
+<li class="chapter" data-level="9" data-path="extra-self-learning.html"><a href="extra-self-learning.html"><i class="fa fa-check"></i><b>9</b> Extra Self Learning</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R (Basic - Intermediate)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Introduction to R (Basic - Intermediate)</h1>
+<p class="author"><em>Abraham Azar (<a href="mailto:abraham.azar@impact-initiatives.org" class="email">abraham.azar@impact-initiatives.org</a>)</em></p>
+<p class="date"><em>2023-05-18</em></p>
+</div>
+<div id="an-introduction-to-r" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> An Introduction to R<a href="an-introduction-to-r.html#an-introduction-to-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="course-introduction" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Course Introduction<a href="an-introduction-to-r.html#course-introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Welcome to this training course. During this course, I hope to introduce you to using R, an interactive environment for statistical computing. R is not difficult to learn, but just like any new language, the initial learning curve can be a little steep and you will need to use it frequently or you forget it.</p>
+<p>I have tried to simplify the content of this course as much as possible to IMPACT needs. My aim is to help you climb the initial learning curve and provide you with basic skills to enable you to further build your experience in using this language.</p>
+<p>This course will be split into an intro, basic, and intermediate levels with exercises and a final project. So, I encourage you to complete the exercises and to watch out for details.</p>
+<p>Buckle up and Enjoy the Ride!!</p>
+</div>
+<div id="faq" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> FAQ<a href="an-introduction-to-r.html#faq" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="what-is-rstudio" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> What is RStudio?<a href="an-introduction-to-r.html#what-is-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>RStudio is an integrated development environment (IDE) for R which works with the standard version of R available from CRAN. RStudio includes a wide range of productivity enhancing features and runs on all major platforms. There are several related IDE products: RStudio Workbench (previously RStudio Server Pro), RStudio Server Open Source, and RStudio Desktop. RStudio Workbench and RStudio Server enable you to provide a browser-based interface to a server running on a remote Linux system.</p>
+</div>
+<div id="what-versions-of-r-is-rstudio-compatible-with" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> What versions of R is RStudio compatible with?<a href="an-introduction-to-r.html#what-versions-of-r-is-rstudio-compatible-with" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>RStudio requires an installation of R 4.2.3 or higher. You can download the most recent version of R for your environment from <a href = "https://cran.r-project.org" >CRAN</a>.</p>
+</div>
+<div id="what-is-the-difference-between-rstudio-desktop-rstudio-server-and-rstudio-workbench" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> What is the difference between RStudio Desktop, RStudio Server, and RStudio Workbench?<a href="an-introduction-to-r.html#what-is-the-difference-between-rstudio-desktop-rstudio-server-and-rstudio-workbench" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>RStudio Desktop is an IDE that works with the version of R you have installed on your local Windows, Mac OS X, or Linux workstation. Version 1.3 and later of RStudio Desktop can also be used as a client of RStudio Workbench (previously RStudio Server Pro).</p>
+<p>RStudio Workbench (previously RStudio Server Pro) and RStudio Server Open Source are Linux server applications that provide a web-browser-based interface to a server running on a remote Linux system. For more on why you might want to deploy an RStudio Server instead of RStudio Desktop, <a href="https://posit.co/products/open-source/rstudio/#Server">see the server documentation</a>.</p>
+<p>Check <a href="https://support.posit.co/hc/en-us/articles/200486548-Frequently-Asked-Questions">POSIT</a> to see more on FAQs.</p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="setup-instruction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
