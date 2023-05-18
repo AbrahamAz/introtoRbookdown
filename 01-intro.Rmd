@@ -1,0 +1,1460 @@
+---
+title: "Introduction to R (Basic - Intermediate)"
+author: "Abraham Azar (abraham.azar@impact-initiatives.org)"
+output:
+  rmdformats::downcute:
+    downcute_theme: "chaos"
+    self_contained: true
+    thumbnails: true
+    lightbox: true
+    gallery: false
+    highlight: tango
+    use_bookdown: true
+---
+```{r warning=FALSE, include=FALSE}
+library(downloadthis)
+library(dplyr)
+library(DT)
+```
+
+# An Introduction to R 
+
+## Course Introduction
+
+Welcome to this training course. During this course, I hope to introduce you to using R, an interactive environment for statistical computing. R is not difficult to learn, but just like any new language, the initial learning curve can be a little steep and you will need to use it frequently or you forget it. 
+
+I have tried to simplify the content of this course as much as possible to IMPACT needs. My aim is to help you climb the initial learning curve and provide you with basic skills to enable you to further build your experience in using this language. 
+
+This course will be split into an intro, basic, and intermediate levels with exercises and a final project. So, I encourage you to complete the exercises and to watch out for details. 
+
+Buckle up and Enjoy the Ride!!
+
+## FAQ
+
+### What is RStudio?
+
+RStudio is an integrated development environment (IDE) for R which works with the standard version of R available from CRAN. RStudio includes a wide range of productivity enhancing features and runs on all major platforms. There are several related IDE products: RStudio Workbench (previously RStudio Server Pro), RStudio Server Open Source, and RStudio Desktop. RStudio Workbench and RStudio Server enable you to provide a browser-based interface to a server running on a remote Linux system.
+
+
+### What versions of R is RStudio compatible with?
+
+RStudio requires an installation of R 4.2.3 or higher. You can download the most recent version of R for your environment from <a href = "https://cran.r-project.org" >CRAN</a>.
+
+### What is the difference between RStudio Desktop, RStudio Server, and RStudio Workbench?
+
+RStudio Desktop is an IDE that works with the version of R you have installed on your local Windows, Mac OS X, or Linux workstation. Version 1.3 and later of RStudio Desktop can also be used as a client of RStudio Workbench (previously RStudio Server Pro).
+
+RStudio Workbench (previously RStudio Server Pro) and RStudio Server Open Source are Linux server applications that provide a web-browser-based interface to a server running on a remote Linux system. For more on why you might want to deploy an RStudio Server instead of RStudio Desktop, <a href="https://posit.co/products/open-source/rstudio/#Server">see the server documentation</a>.
+
+Check <a href="https://support.posit.co/hc/en-us/articles/200486548-Frequently-Asked-Questions">POSIT</a> to see more on FAQs.
+
+# Setup Instruction
+
+## Core Software
+
+During this course, we will be using <strong>RStudio</strong>. To get your computer ready for this course, please follow the instructions below.
+
+<strong>First</strong>, install <strong>R</strong>. By the time you are conducting this training, you will need R version <strong>4.2.3</strong> or higher. Download and install R for <a href="https://cran.r-project.org/bin/windows/base/">Windows</a>, <a href="https://cran.r-project.org/bin/macosx/">Mac</a> or <a href="https://cran.r-project.org/bin/linux/">linux</a>.
+
+<strong>Second</strong>, install <strong>RStudio</strong>. Download and install the free <a href="https://posit.co/download/rstudio-desktop/">RStudio Desktop</a> version.
+
+These two software are downloaded and installed separately. R is the statistical computing environment, and RStudio is the IDE that makes R used better and easier. 
+
+## RStudio Interface
+
+The RStudio interface is composed of quadrants, each of which fulfills a unique purpose:
+
+* The `Console` window,
+* The `Source` window,
+* The `Environment / History / Connections / Tutorial` window,
+* The `Files / PLots / Packages / Help / Viewer` window
+
+Sometimes only three windows might be showing, and you will be wondering where is the <strong>Source</strong> window has gone. In order to use it, you have to create a new one. You can create a new file by selecting `File -> New File -> R Script `.
+
+## Installing first package
+
+You will realize across your work with R that most of the cool features and tools comes from third-party packages. They are super easy to install. You will find different ways to install packages in R, mainly through the `install.packages()` command.
+
+Try installing `ggplot2` package from the console window. 
+
+
+> install.packages('ggplot2')
+
+
+The process should be straightforward. R will automatically install any other packages that `ggplot2` might need. Throughout this course, we will be focusing on couple of libraries that are mostly used within IMPACT. Remember that with R, it is literally to the infinity and beyond and hopefully you will be building your own packages one day. 
+
+# Tips before starting our journey
+
+## RStudio Projects
+
+RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents.
+Here are more info on how to create a project. <a href = "https://support.posit.co/hc/en-us/articles/200526207-Using-Projects">POSIT</a>
+
+## R Scripts
+
+Try to put all the steps of your works in an RScript rather than running all your work in the console window. This way you will be able to share the work with others and get the same results every time. 
+
+The larger the poject the more complex the work become. From experience, try to split your tasks and work into different scripts to not be overwhelmed with thousands of lines of codes. 
+
+## Good Layouts
+
+Try to be consisting in your layouting. 
+
+* Load first libraries
+* Load the data you are working with
+* Change or analyse your data
+* Output and save your work. 
+
+## Write readable codes
+
+For many obvious reasons:
+
+* Other people might need to use or see your code
+* You might need to use your code in the future
+
+You might write the perfect functional code, but not understand one single line. Below are some examples.
+
+### Basic formatting
+
+Use the following simple rules for writing readable codes:
+
+* Use spaces between variables and operators
+* Break up long line of codes. You can set up a threshold max line by going to `Tools -> Global Options -> Code -> Display -> Show Margin -> set up to 110`
+* Use meaningful variable names taking into consideration that R is case sensitive. 
+
+See the difference between:
+
+```r
+malDiff1=lm(y~grp+grpTim,df,subset=sext1=="m")
+```
+and:
+```r
+male_difference = lm(score ~ group + group_time_interaction,
+                     data = interview_data,
+                     subset = gender == "male")
+```
+
+Both codes are the same, but the second is better 😊.
+
+### Be Consistent
+
+Make sure to stay consistent across your whole script as you and the nexst person using the script will get used to the format in use and will be able to identify variables and data frames. 
+
+### The most important: Include Comments
+
+It is the best feeling in the world when I open someone's else code and find comments in them. Comments are used to either explain what you are trying to do or to even show how to use the script the right way. Comments in R are written using `#`.
+
+```r
+# Here I am adding two variables
+
+variable1 <- 1 # first variable
+variable2 <- 4 # second variable
+
+sum <- variable1 + variable2
+```
+
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# Here I am adding two variables
+
+variable1 <- 1 # first variable
+variable2 <- 4 # second variable
+
+sum <- variable1 + variable2
+sum
+```
+
+# Quiz 1 (Intro to R)
+
+If you would like to test your knowledge, please click on the link below and complete the <strong>Intro to R</strong> questions. 
+
+<a href = "https://abrahamazar.shinyapps.io/Quizzes/"> `LINK`</a>
+
+# Basics of R
+
+There is couple of things to know about programming fundamentals before jumping and building your first script in R. R is just another programming language that is available to serve you at your command. 
+
+First we start from the basics of <strong> Data Types </strong>.
+
+## Basic Data Types
+
+### Numbers
+
+Numbers in R can be called either <strong>numerics</strong> or <strong>integers</strong>.
+
+```r
+## Numeric variable
+x <- 28.5
+class(x)
+```
+
+Output:
+```{r echo=FALSE, warning=FALSE}
+x <- 28.5
+class(x)
+```
+
+```r
+## Integer variable
+y <- 28L
+class(y)
+```
+
+Output:
+```{r echo=FALSE, warning=FALSE}
+y <- 28L
+class(y)
+```
+
+### Logical
+
+Logical is a Boolean value with a binary operators: <strong>TRUE</strong> or <strong>FALSE</strong> 
+
+```r
+## Logical variable
+z <- TRUE
+class(z)
+```
+
+Output:
+```{r echo=FALSE, warning=FALSE}
+z <- TRUE
+class(z)
+```
+
+#### or:
+
+```r
+## Logical variable
+logical <- 2 < 1
+class(logical)
+```
+
+Output:
+```{r echo=FALSE, warning=FALSE}
+logical <- 2 < 1
+class(logical)
+```
+
+### Characters
+
+Anything that is put inside `" "` or`' '` are considered a text (string).
+
+```r
+## String variable
+my_string <- "I love this training"
+class(my_string)
+```
+
+Output:
+```{r echo=FALSE, warning=FALSE}
+my_string <- "I love this training"
+class(my_string)
+```
+
+
+## Operators in R
+
+Operators in R are used to perform operations on variables and values.
+
+They are divided in the followin groups:
+
+* <strong>Arithmetic</strong> operators
+* <strong>Assignment</strong> operators
+* <strong>Comparison</strong> operators
+* <strong>Logical</strong> operators
+* <strong>Miscellaneous</strong> operators
+
+### Arithmetic
+
+Mainly used to perform common arithmetic operations.
+
+<table>
+  <tr>
+    <th>Operator</th>
+    <th>Name</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>`+`</td>
+    <td>Addition</td>
+    <td>x + y</td>
+  </tr>
+  <tr>
+    <td>`-`</td>
+    <td>Subtraction</td>
+    <td>x - y</td>
+  </tr>
+  <tr>
+    <td>`*`</td>
+    <td>Multiplication</td>
+    <td>x * y</td>
+  </tr>
+  <tr>
+    <td>`/`</td>
+    <td>Division</td>
+    <td>x / y</td>
+  </tr>
+  <tr>
+    <td>`^`</td>
+    <td>Exponent</td>
+    <td>x ^ y</td>
+  </tr>
+  <tr>
+    <td>`%%`</td>
+    <td>Modulus</td>
+    <td>x %% y</td>
+  </tr>
+  <tr>
+    <td>`%/%`</td>
+    <td>Integer Division</td>
+    <td>x %/% y</td>
+  </tr>
+</table>
+
+### Assignment 
+
+These operators are used to assign values to variables.
+
+```r
+my_var <- "value"
+my_var <<- "value"
+my_var = "value"
+"value" -> my_var
+"value" ->> my_var
+my_var ## to print my_var
+```
+Output:
+```{r echo=FALSE, warning=FALSE}
+my_var <- "value"
+my_var <<- "value"
+my_var = "value"
+"value" -> my_var
+"value" ->> my_var
+my_var
+```
+
+### Comparison
+
+Mainly used to compare two values.
+
+<table>
+  <tr>
+    <th>Operator</th>
+    <th>Name</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>`==`</td>
+    <td>Equal</td>
+    <td>x == y</td>
+  </tr>
+  <tr>
+    <td>`!=`</td>
+    <td>Not equal</td>
+    <td>x != y</td>
+  </tr>
+  <tr>
+    <td>`>`</td>
+    <td>Greater than</td>
+    <td>x > y</td>
+  </tr>
+  <tr>
+    <td>`<`</td>
+    <td>Less than</td>
+    <td>x < y</td>
+  </tr>
+  <tr>
+    <td>`>=`</td>
+    <td>Greater than or equal to</td>
+    <td>x >= y</td>
+  </tr>
+  <tr>
+    <td>`<=`</td>
+    <td>Less than or equal to</td>
+    <td>x <= y</td>
+  </tr>
+</table>
+
+### Logical
+
+Mainly used to combine conditional statements
+
+<table>
+  <tr>
+    <th>Operator</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>`&`</td>
+    <td>Element-wise logical AND. Return <strong>TRUE</strong> if both elements are TRUE</td>
+  </tr>
+  <tr>
+    <td>`&&`</td>
+    <td>Logical AND. Return <strong>TRUE</strong> if both statements are TRUE</td>
+  </tr>
+  <tr>
+    <td>`|`</td>
+    <td>Element-wise logical OR. Return <strong>TRUE</strong> if one of the elements is TRUE</td>
+  </tr>
+  <tr>
+    <td>`||`</td>
+    <td>Logical OR. Return <strong>TRUE</strong> if on of the statements is TRUE</td>
+  </tr>
+  <tr>
+    <td>`!`</td>
+    <td>Logical NOT. Return <strong>FALSE</strong> if statement is TRUE</td>
+  </tr>
+</table>
+
+### Miscellaneous
+
+Mainly used to manipulate data. We will see them a lot in use in coming chapters. 
+
+<table>
+  <tr>
+    <th>Operator</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+  <tr>
+    <td>`:`</td>
+    <td>Create series of numbers in a sequence</td>
+    <td>x <- 1:10</td>
+  </tr>
+  <tr>
+    <td>`%in%`</td>
+    <td>Find an element inside a vector (to be explained later)</td>
+    <td> x %in% y</td>
+  </tr>
+</table>
+
+## Data Structures in R
+
+### Variables
+
+Variables are objects for storing data values. There is no commend to create a variable and it is set the moment a value is assigned. We saw in the previous operators chapters an example of assigning a value to a variable. 
+
+
+```r
+name <- "Abraham"
+age <- 30
+name
+age
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+name <- "Abraham"
+age <- 30
+name
+age
+```
+
+Variables can be concatenate together using the `paste()` function. Use a comma (`,`) between the variables inside the function. 
+
+
+```r
+name <- "Abraham"
+age <- 30
+paste(name, " is ", age, " years old.")
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+name <- "Abraham"
+age <- 30
+paste(name, " is ", age, " years old.")
+```
+
+For numbers, you can use the arithmetic operator (`+`) but it will perform the actual addition. If you try to use it between a numeric and character types variable, R will give you an error.
+
+```r
+name <- "Abraham"
+age <- 30
+name + age
+```
+Output:
+
+```{r echo=FALSE, error=TRUE, warning=FALSE}
+name <- "Abraham"
+age <- 30
+
+print(name + age)
+```
+
+### Vectors
+
+Vectors are a list of items that are from the same type. You will be using them a lot to identify and assign lists to be iterated or used to be compared with other lists. 
+
+To combine items in a vector list, you can use the `c()` function and use the comma to separate the items. 
+
+```r
+names <- c("Abraham","Maksym","Oleksandr","Karyna")
+names
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+names <- c("Abraham","Maksym","Oleksandr","Karyna")
+names
+```
+
+You can use the `:` operator if you want to create a list of vectors with a series of numbers. 
+
+```r
+numeric_list <- c(1:10)
+numeric_list
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+numeric_list <- c(1:10)
+numeric_list 
+```
+
+The following is some <strong>features</strong> used in vectors.
+
+#### Access Vectors
+
+You can access an item inside a vector by adding a number inside brackets `[]`.
+<strong>Please note that in R, unlike other programming languages, items start at index `1`.</strong>
+
+```r
+names <- c("Abraham","Maksym","Oleksandr","Karyna")
+names[1]
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+names <- c("Abraham","Maksym","Oleksandr","Karyna")
+names[1]
+```
+
+#### Replace items in Vectors
+
+You can assign a new value targeting the item you want to change using the index.
+
+```r
+names <- c("Abraham","Maksym","Oleksandr","Karyna")
+names[1] <- "Anastasiia"
+names
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+names <- c("Abraham","Maksym","Oleksandr","Karyna")
+names[1] <- "Anastasiia"
+names
+```
+
+#### Vector Length
+
+You can check the vector's length using the `length()` function
+
+```r
+names <- c("Abraham","Maksym","Oleksandr","Karyna")
+length(names)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+names <- c("Abraham","Maksym","Oleksandr","Karyna")
+length(names)
+```
+
+### Factors
+
+Factors exists to categorize data and the categories inside a factor are considered levels in R. To create a factor, you can use the `factor()` function. 
+
+```r
+units <- factor(c("ISU","CEU","Sectors","ISU","ISU","CASH","CEU"))
+units
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+units <- factor(c("ISU","CEU","Sectors","ISU","ISU","CASH","CEU"))
+units
+```
+
+You can set the levels inside the factor function by calling the parameter `levels`.
+
+Same as vectors, you can <strong> Access, Change, and check the lenght</strong>. 
+
+
+### Data frames
+
+Data frames are the most commonly used data structure in R. It is a data displayed in the format of a table. Data frames can store different types of data in every column. It can be characters, numeric, or logical. Remember, each complumn should have the same type.
+
+You can use `data.frame()` function to create a data frame. 
+
+
+```r
+units_df <- data.frame(
+  units = c("ISU","CEU","CASH","Sectors"),
+  num_of_employess = c(10,45,20,1),
+  success = c(T,T,T,T)
+)
+units_df
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+units_df <- data.frame(
+  units = c("ISU","CEU","CASH","Sectors"),
+  num_of_employess = c(10,45,20,1),
+  success = c(T,T,T,T)
+)
+units_df
+```
+
+You can use the `summary()` function to summarise your data frame. 
+
+```r
+summary(units_df)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+summary(units_df)
+```
+
+#### Access items in df
+
+You can use single brackets `[ ]`, double brackets `[[ ]]`, or `$` sign to access a column.
+
+```r
+units_df[1]
+
+units_df[["units"]]
+
+units_df$units
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+units_df[1]
+
+units_df[["units"]]
+
+units_df$units
+```
+
+
+#### Combine rows to df or df to df
+
+You can use the `rbind()` function to combine a row to an existing df, or two dfs together. 
+
+```r
+new_units_df <- data.frame(
+  units = c("ISU","CEU","Sectors"),
+  num_of_employess = c(10,45,1),
+  success = c(T,T,T)
+)
+
+combined_df <- rbind(units_df, new_units_df)
+
+combined_df
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+new_units_df <- data.frame(
+  units = c("ISU","CEU","Sectors"),
+  num_of_employess = c(10,45,1),
+  success = c(T,T,T)
+)
+
+combined_df <- rbind(units_df, new_units_df)
+
+combined_df
+```
+
+
+#### Amount of Rows and Columns
+
+You can use `ncol()` and `nrow()` to check the amount of rows and columns of a df.
+
+```r
+ncol(combined_df)
+nrow(combined_df)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+ncol(combined_df)
+nrow(combined_df)
+```
+
+
+## Conditions and statements
+
+We saw in the Operators section some of the conditions that can be used to compare mathematical statements. R support as well conditions such as <strong>if statements and others</strong>.
+
+### If Statement
+
+The "if statement" use `if` keyword and have the following syntax to be executed.
+
+```r
+num_one <- 20
+num_two <- 30
+
+if (num_one < num_two) {
+  print("num_two is greater than num_one")
+}
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+num_one <- 20
+num_two <- 30
+
+if (num_one < num_two) {
+  print("num_two is greater than num_one")
+}
+```
+
+### Else If
+
+This statement use `else if` keyword and is used if the previous conditions is not true, then use this condition. You can use as many `else if` as you want.
+
+```r
+num_one <- 20
+num_two <- 20
+
+if (num_one < num_two) {
+  print("num_two is greater than num_one")
+} else if (num_two == num_one){
+  print("num_one and num_two are equal")
+}
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+num_one <- 20
+num_two <- 20
+
+if (num_one < num_two) {
+  print("num_two is greater than num_one")
+} else if (num_two == num_one){
+  print("num_one and num_two are equal")
+}
+```
+
+### If Else
+
+`else` is a keyword that is used to catch anything that is not meeting any of the previous conditions. 
+
+```r
+num_one <- 30
+num_two <- 20
+
+if (num_one < num_two) {
+  print("num_two is greater than num_one")
+} else if (num_two == num_one){
+  print("num_one and num_two are equal")
+} else {
+  print("num_one is greater than num_two")
+}
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+num_one <- 30
+num_two <- 20
+
+if (num_one < num_two) {
+  print("num_two is greater than num_one")
+} else if (num_two == num_one){
+  print("num_one and num_two are equal")
+} else {
+  print("num_one is greater than num_two")
+}
+```
+
+
+### Use of AND or OR in IF
+
+Remembering from the operators section, we learned about the logical ones. They can be used in defining two conditions. 
+
+
+```r
+num_one <- 30
+num_two <- 20
+num_three <- 100
+
+if (num_one > num_two & num_three > num_two) {
+  print("Both conditions TRUE.")
+}
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+num_one <- 30
+num_two <- 20
+num_three <- 100
+
+if (num_one > num_two & num_three > num_two) {
+  print("Both conditions TRUE.")
+}
+```
+
+
+```r
+num_one <- 30
+num_two <- 20
+num_three <- 100
+
+if (num_one > num_two | num_two > num_three) {
+  print("At least one condition is TRUE.")
+}
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+num_one <- 30
+num_two <- 20
+num_three <- 100
+
+if (num_one > num_two | num_two > num_three) {
+  print("At least one condition is TRUE.")
+}
+```
+
+### For Loop
+
+`for` loops are used to iterate over a sequence, vector, list, or rows/columns of data frames.
+
+```r
+for(i in 1:10){
+  print(i)
+}
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+for(i in 1:10){
+  print(i)
+}
+```
+
+Another example with the units list from before:
+
+```r
+for(i in units){
+  print(i)
+}
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+for(i in units){
+  print(i)
+}
+```
+
+# Quiz 2 (Basics of R)
+
+If you would like to test your knowledge, please click on the link below and complete the <strong>Basics of R</strong> questions. 
+
+<a href = "https://abrahamazar.shinyapps.io/Quizzes/"> `LINK`</a>
+
+# Intermediate level
+
+<strong>Congratulations!!</strong> You made it to the next level.
+
+In this level, we will dive more into specific packages that are mostly used within IMPACT as part of data manipulation and data wrangling in R. Please make sure that you have completed the Basic levels of R before diving deeper. Almost all concepts mentioned are crucial for this part. 
+
+### Data to be used
+
+In this course, I will be using a part of the 2022 MSNA Ukraine data in the examples below. You will find the dataset here to download so you can work at the same time and practice. 
+
+```{r echo=FALSE, warning=FALSE}
+data <- readxl::read_excel("data/book1.xlsx", col_types = "text")
+datatable(data)
+```
+
+```{r echo=FALSE, warning=FALSE}
+data %>% 
+  downloadthis::download_this(
+    output_name = "MSNA_2022_UKRAINE_Dummy_Data",
+    output_extension = ".xlsx",
+    button_label = "Download Data",
+    button_type = "warning"
+  )
+```
+
+## R Packages
+
+Packages are the fundamental units of reproducible R code. They include reusable R functions, the documentation that describes how to use them, and sample data.
+
+In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. As of March 2023, there were over 19,000 packages available on the Comprehensive R Archive Network, or <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">CRAN</a>, the public clearing house for R packages. This huge variety of packages is one of the reasons that R is so successful: the chances are that someone has already solved a problem that you’re working on, and you can benefit from their work by downloading their package.
+
+The goal of this training is to get you acquainted with couple of packages and prepare you to tackle some of the main data manipulation needed in your every day tasks with IMPACT.
+
+* You can install the packages from CRAN with `install.packages("x")`
+* You can use them in R with `library("x") or library(x)`.
+
+The main packages that you might come across while you start working in R regularly are:
+
+* <em><a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf">dplyr</a></em>: A Grammar for Data Manipulation
+* <em><a href="https://cran.r-project.org/web/packages/tidyr/tidyr.pdf">tidyr</a></em>: For tidying messy data
+* <em><a href="https://cran.r-project.org/web/packages/srvyr/srvyr.pdf">srvyr</a></em>: For analyzing survey data
+* <em><a href="https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf">ggplot2</a></em>: For making graphs
+* <em><a href="https://cran.r-project.org/web/packages/leaflet/leaflet.pdf">leaflet</a></em>: For creating maps
+* And many others
+
+In this course, we will focus mainly on `dplyr` package using an example of dataset from the 2022 MSNA in Ukraine. 
+
+## dplyr
+
+### What is dplyr?
+
+Dplyr is a powerful R package to manipulate, clean and summarize unstructured data. It makes data manipulation very fast. It compromises of many functions that perform mostly used data manipulation operations such as filtering, selecting specific columns, sorting data, adding or deleting columns, aggregating data. 
+
+To install and load dplyr package into your RStudio, follow the steps
+
+> install.packages('dplyr')
+
+> library(dplyr)
+
+### Most important functions
+
+The most common used functions in the dplyr package are:
+
+* `select()`: picks columns based on their names or type
+* `filter()`: picks rows based on their values
+* `group_by()`: group the rows together depending on conditions
+* `summarise()`: summarize or aggregate the data together
+* `arrange()`: sort and order the rows by values of the column
+* `mutate()`: create new variables by mutating existing ones
+* `join()`: joining data frames together
+* `rename()`: rename column names in your dataset
+
+### Pipes
+
+You will most likely come across this symbol `%>%`. It is used to emphasise the sequence of actions and chain together different actions that are performed together.
+
+For example:
+
+* We will `filter` our data to keep only ages above 18
+* <em>then</em>, we want to `mutate` the sum of income in last month and this month
+* <em>then</em>, we want to `group_by` the hromada together
+* <em>finally</em>, `summarise` the average income per hromada.
+
+Here is some documentation on <a href="https://dplyr.tidyverse.org/articles/dplyr.html#combining-functions-with">`%>%`</a>
+
+## Jump to action
+
+Before jumping literally to action, it will be good to learn how to import your own data to R, for example the data you just downloaded above. In R, you can import any kind of data, <strong> XLSX, CSV, JSON, GeoData, etc. </strong>. Today, we will learn how to import an Excel file. 
+
+You will need to import the `readxl` package. You should know by now how to install new packages and use it in the script. Take a moment to do so. 
+
+Then, you can use the 
+
+```r
+readxl::read_excel(path = "data/your_data.xlsx", col_types = "text", na = c("NA","")) 
+```
+
+The `path` parameter is where your data is sitting in your repository. 
+
+The `col_types` parameter is a crucial one. We should always try to force reading all columns as `character` data type and transform them in our actions to numeric if needed to not face any possible issues that might arise.
+
+The `na` parameter is taking care of empty strings. By default, `""`empty strings in the data are considered NAs, but you can also force other strings to be considered NA.
+
+### `select()` function
+
+Let's say we would like to select only the `uuid` and the `A_2_respondent_sex`.
+
+```r
+age_respondent_df <- data %>% 
+  select(uuid,A2_respondent_sex)
+
+head(age_respondent_df)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+age_respondent_df <- data %>% 
+  select(uuid,A_2_respondent_sex)
+head(age_respondent_df)
+rm(age_respondent_df)
+```
+
+Let's breakdown a bit the code above. As you see, We started by assigning a new data frame to `age_respondent_df`. If you start with `data <- data %>% `, you will be overwriting the actual data with the new actions. 
+We also used a new function called `head()` which shows only the first few rows of you data.
+
+You can perform many different actions with the `select()` function.
+
+To select all columns except specific ones, you can use the `-`subtraction operator.
+
+```r
+df_without_uuid <- data %>% 
+  select(-uuid)
+```
+
+To select the first five columns, you can use the `:` colon operator with indexes or the names of the columns.
+
+```r
+first_five_col_df <- data %>% 
+  select(1:5)
+```
+To select all columns that start with a specific character string like `"A_"`, you can use the function `starts_with()`.
+
+```r
+all_A_columns_df <- data %>% 
+  select(starts_with("A_"))
+```
+
+Here are some additional options to select columns based on a specific criteria:
+
+* <em>`ends_with()`</em>: Select columns that end with a specific character string
+* <em>`contatins()`</em>: Select columns that contains a specific character string
+* <em>`matches()`</em>: Select columns that matches a specific character string or a <a href="https://regex101.com/">REGEX</a>
+
+Here is some documentation on <a href="https://dplyr.tidyverse.org/reference/select.html">`select()`</a>
+
+### `filter()` function
+
+Filter is used to select specific rows from the datasets. Let's say we would like to only see the HHs that are above 60 years old. 
+
+
+```r
+elderly_df <- data %>% 
+  select(uuid,A_1_respondent_age) %>% 
+  filter(as.numeric(A_1_respondent_age) > 60)
+
+head(elderly_df)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+elderly_df <- data %>% 
+  select(uuid,A_1_respondent_age) %>% 
+  filter(as.numeric(A_1_respondent_age) > 60)
+
+head(elderly_df)
+rm(elderly_df)
+```
+
+You can see that we also used a new function called `as.numeric()`. If you recall, while we imported the data to R, we did read all columns as characters. Hence why we are transforming it to numeric to be able to conductr some mathematical computations. 
+
+You can use all the logical operators here for combining conditions. 
+
+
+```r
+elderly_male_df <- data %>% 
+  select(uuid,A_1_respondent_age, A_2_respondent_sex) %>% 
+  filter(as.numeric(A_1_respondent_age) > 60 & A_2_respondent_sex =="male")
+
+head(elderly_male_df)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+elderly_male_df <- data %>% 
+  select(uuid,A_1_respondent_age, A_2_respondent_sex) %>% 
+  filter(as.numeric(A_1_respondent_age) > 60 & A_2_respondent_sex =="male")
+
+head(elderly_male_df)
+rm(elderly_male_df)
+```
+
+You can use the `%in%` operator to filter for specific group of values in a column.
+
+```r
+shelter_type <- data %>% 
+  select(uuid,D_1_shelter_type) %>% 
+  filter(D_1_shelter_type %in% c("detached_house","apartment_in_apartment_block"))
+
+head(shelter_type)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+shelter_type <- data %>% 
+  select(uuid,D_1_shelter_type) %>% 
+  filter(D_1_shelter_type %in% c("detached_house","apartment_in_apartment_block"))
+
+head(shelter_type)
+rm(shelter_type)
+```
+
+Here is some documentation on <a href="https://dplyr.tidyverse.org/reference/filter.html">`filter()`</a>
+
+### `arrange()` function
+
+Arrange is used to re-order rows following a particular order. You will only need to provide the name of the column. If it is of a character type, it will arrange alphabetically. If it is numeric, then it will arrange ascendant or descendant depending on your specification. 
+
+
+```r
+age <- data %>% 
+  select(uuid, A_1_respondent_age) %>%
+  arrange(A_1_respondent_age)
+
+head(age)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+age <- data %>% 
+  select(uuid, A_1_respondent_age) %>%
+  arrange(A_1_respondent_age)
+
+head(age)
+rm(age)
+```
+You can also add multiple columns to arrange the rows respectively. You should add `desc()` to the column inside `arrange()` if you are aiming for a descendant order.
+
+```r
+age_desc <- data %>% 
+  select(uuid, A_1_respondent_age) %>%
+  arrange(desc(A_1_respondent_age))
+
+head(age_desc)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+age_desc <- data %>% 
+  select(uuid, A_1_respondent_age) %>%
+  arrange(desc(A_1_respondent_age))
+
+head(age_desc)
+rm(age_desc)
+```
+
+Here is some documentation on <a href="https://dplyr.tidyverse.org/reference/arrange.html">`arrange()`</a>
+
+### `mutate()` function
+
+This function will add a new column to your data frame. Here is where the fun begins and sky is your limit. I will be giving here many examples of what you can use inside a `mutate()` function.
+
+<strong>If I want to fill a new column with a single string</strong>
+
+
+```r
+single_string_col <- data %>% 
+  mutate(test_column = "test") %>% 
+  select(uuid,test_column)
+
+
+head(single_string_col)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+single_string_col <- data %>% 
+  mutate(test_column = "test") %>% 
+  select(uuid,test_column)
+
+head(single_string_col)
+rm(single_string_col)
+```
+
+
+<strong>We can also do some calculations</strong>
+
+```r
+# creating the set of columns with only shelter_issues
+shelter_columns <- data %>% 
+  select(starts_with("D_7_shelter_issues/"),-c("D_7_shelter_issues/none","D_7_shelter_issues/dont_know","D_7_shelter_issues/prefer_not_to_answer")) %>% 
+  colnames
+
+## the actual new data frame
+shelter_issues <- data %>% 
+  mutate(new_column_one = rowSums(across(shelter_columns, .fns = as.numeric), na.rm =T)) %>% 
+  select(uuid,new_column_one) %>% 
+  arrange(desc(new_column_one))
+
+head(shelter_issues)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# creating the set of columns with only shelter_issues
+shelter_columns <- data %>% 
+  select(starts_with("D_7_shelter_issues/"),-c("D_7_shelter_issues/none","D_7_shelter_issues/dont_know","D_7_shelter_issues/prefer_not_to_answer")) %>% 
+  colnames
+
+## the actual new data frame
+shelter_issues <- data %>% 
+  mutate(new_column_one = rowSums(across(shelter_columns, .fns = as.numeric), na.rm =T)) %>% 
+  select(uuid,new_column_one) %>% 
+  arrange(desc(new_column_one))
+
+head(shelter_issues)
+rm(shelter_issues)
+```
+Here we targeted all shelter issues and calculated the sum of shelter issues the HH is facing. We can see there is new function called `rowSums()` which is a <strong>base</strong> function that let you add multiple columns values in a row wise manner. Also, `across()` function is a <strong>dplyr</strong> function that calls many columns at the same time and you can provide a `.fns` parameter that force a `as.numeric()` function on all columns. 
+`starts_with()` also is a <strong>dplyr</strong> function, only used inside `select()` function to target columns starting with specific pattern.  
+
+
+<strong>We can include some conditions with `ifelse()` or `case_when()`</strong>
+
+```r
+# male HoHH or female HoHH
+hoHH_genderifelse <- data %>% 
+  mutate(gender_head_household = ifelse(A_3_respondent_hohh == "yes" & A_2_respondent_sex == "male", "male_hoHH",
+                                        ifelse(A_3_respondent_hohh == "yes" & A_2_respondent_sex == "female", "female_hoHH", "other"))) %>% 
+  select(uuid, gender_head_household)
+
+head(hoHH_genderifelse)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# male HoHH or female HoHH
+hoHH_genderifelse <- data %>% 
+  mutate(gender_head_household = ifelse(A_3_respondent_hohh == "yes" & A_2_respondent_sex == "male", "male_hoHH",
+                                        ifelse(A_3_respondent_hohh == "yes" & A_2_respondent_sex == "female", "female_hoHH", "other"))) %>% 
+  select(uuid, gender_head_household)
+
+head(hoHH_genderifelse)
+rm(hoHH_genderifelse)
+```
+As you can see, I used `ifelse()` many times to target every single options in my conditions. In case we have <strong>NA</strong> in our data, it is better to handle them with the first condition being `is.na(...), NA, ...`.
+
+```r
+# male HoHH or female HoHH
+hoHH_gendercasewhen <- data %>% 
+  mutate(gender_head_household = case_when(A_3_respondent_hohh == "yes" & A_2_respondent_sex == "male" ~ "male_hoHH",
+                                           A_3_respondent_hohh == "yes" & A_2_respondent_sex == "female" ~ "female_hoHH",
+                                           TRUE ~ "other")) %>% 
+  select(uuid, gender_head_household)
+
+head(hoHH_gendercasewhen)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# male HoHH or female HoHH
+hoHH_gendercasewhen <- data %>% 
+  mutate(gender_head_household = case_when(A_3_respondent_hohh == "yes" & A_2_respondent_sex == "male" ~ "male_hoHH",
+                                           A_3_respondent_hohh == "yes" & A_2_respondent_sex == "female" ~ "female_hoHH",
+                                           TRUE ~ "other")) %>% 
+  select(uuid, gender_head_household)
+
+head(hoHH_gendercasewhen)
+rm(hoHH_gendercasewhen)
+```
+
+Here is some documentation on <a href="https://dplyr.tidyverse.org/reference/mutate.html">`mutate()`</a>
+
+### `summarise()` function
+
+Summarise function is used to create summary for a column in the data frame, such as finding the `mean`, `min`, or `max`.
+
+```r
+# average age
+age_average <- data %>% 
+  summarise(average_age = mean(as.numeric(A_1_respondent_age)))
+
+age_average
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# average age
+age_average <- data %>% 
+  summarise(average_age = mean(as.numeric(A_1_respondent_age)))
+
+age_average
+rm(age_average)
+```
+You can also perform multiple summary of a column:
+
+```r
+# age stats
+age_stats <- data %>% 
+  summarise(average_age = mean(as.numeric(A_1_respondent_age)),
+            min_age = min(as.numeric(A_1_respondent_age)),
+            max_age = max(as.numeric(A_1_respondent_age)),
+            total_num_submission = n())
+
+age_stats
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# age stats
+age_stats <- data %>% 
+  summarise(average_age = mean(as.numeric(A_1_respondent_age)),
+            min_age = min(as.numeric(A_1_respondent_age)),
+            max_age = max(as.numeric(A_1_respondent_age)),
+            total_num_submission = n())
+
+age_stats
+rm(age_stats)
+```
+Here are the different summary statistics you can perform:
+
+* <em>`sd()`</em>: Standard deviation
+* <em>`min()`</em>: Minimum value
+* <em>`max()`</em>: Maximum value
+* <em>`median()`</em>: Median
+* <em>`mean()`</em>: Mean
+* <em>`sum()`</em>: Sum
+* <em>`n()`</em>: Length of the vector (count of all rows)
+* <em>`first()`</em>: First value in the vector
+* <em>`last()`</em>: Last value in the vector
+* <em>`n_distinct()`</em>: Number of distinct values in vector
+
+
+Here is some documentation on <a href="https://dplyr.tidyverse.org/reference/summarise.html">`summarise()`</a>
+
+### `group_by()` function
+
+This function is very important to know if you are aiming to create disaggregations in your data and combine groups/strata together. It is usually always followed by a summarise as the main goal of using it is to split and apply a computation.
+
+Let's say we want to know the number of males vs female in our data. 
+
+```r
+# gender disaggregation
+gender <- data %>% 
+  group_by(A_2_respondent_sex) %>% 
+  summarise(count = n())
+
+gender
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# gender disaggregation
+gender <- data %>% 
+  group_by(A_2_respondent_sex) %>% 
+  summarise(count = n())
+
+gender
+rm(gender)
+```
+We can actually calculate and then ungroup using the following dplyr function `ungroup()`, and the column will remain providing the value for each group respectively. However, instead of `summarise()` we should use `mutate()`.
+
+```r
+# gender age average ungrouped
+gender_age_average_ungrouped <- data %>% 
+  group_by(A_2_respondent_sex) %>% 
+  mutate(age_average = mean(as.numeric(A_1_respondent_age))) %>% 
+  ungroup() %>% 
+  select(uuid, A_2_respondent_sex, age_average)
+
+head(gender_age_average_ungrouped)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# gender age average ungrouped
+gender_age_average_ungrouped <- data %>% 
+  group_by(A_2_respondent_sex) %>% 
+  mutate(age_average = mean(as.numeric(A_1_respondent_age))) %>% 
+  ungroup() %>% 
+  select(uuid, A_2_respondent_sex, age_average)
+
+head(gender_age_average_ungrouped)
+rm(gender_age_average_ungrouped)
+```
+
+Here is some documentation on <a href="https://dplyr.tidyverse.org/reference/group_by.html">`group_by()`</a>
+
+### `join()` function
+
+We can use the `join` function to merge multiple data frames together. The most used function that you might run through is the `left_join()`. 
+
+Here are the different <strong>join</strong> functions you might encounter as well:
+
+* <em>`inner_join()`</em>: return all rows from dataframe_1 where there are matching values in dataframe_2 and all the columns in both dataframes. All matches are returned.
+* <em>`left_join()`</em>: return all rows from dataframe_1 and all columns from both dataframes. Rows that are in dataframe_1 and not in dataframe_2 will include `NA` values in the column from dataframe_2. All matches are returned.
+* <em>`right_join()`</em>: return all rows from dataframe_2 and all columns from both dataframes. Rows that are in dataframe_2 and not in dataframe_1 will include `NA` values in the column from dataframe_1. All matches are returned.
+* <em>`full_join()`</em>: return all rows and columns from both dataframes. if there is no match, `NA` is filled in the missing values.
+
+Here is another Excel file including some data for all 1000 submission about the the total number of days with piped water disruptions. Below is the button to upload the data.
+
+```{r echo=FALSE, warning=FALSE}
+pipe_water_data <- readxl::read_excel("data/new_data.xlsx", col_types = "text") 
+pipe_water_data %>% 
+  downloadthis::download_this(
+    output_name = "MSNA_2022_UKRAINE_Dummy_water_pipe_data",
+    output_extension = ".xlsx",
+    button_label = "Download Data",
+    button_type = "warning"
+  )
+```
+
+
+```r
+# join pipe_water_data with original data
+joined_data <- data %>% 
+  left_join(pipe_water_data, by=c("uuid")) %>% 
+  select(uuid, A_2_respondent_sex, F_2_piped_water_disruptions)
+
+head(joined_data)
+```
+Output:
+
+```{r echo=FALSE, warning=FALSE}
+# join pipe_water_data with original data
+joined_data <- data %>% 
+  left_join(pipe_water_data, by=c("uuid")) %>% 
+  select(uuid, A_2_respondent_sex, F_2_piped_water_disruptions)
+
+head(joined_data)
+rm(joined_data)
+```
+
+Here is some documentation on <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">`join()`</a>
+
+# Final Push (Exercise/Test)
+
+You are finally in the last part of this course. The final <strong>test</strong> to kick off your <em>hopefully</em> long journey with <strong>R</strong>. 
+
+You will be given two data sets of the Poland MSNA, one is the Household (HH) level questions and the Individual (Ind) level questions that usually is asked via the loop system in ODK. Both data sets includes the `UUID` column as a Unique identifier and a pointer to each data sets. 
+
+
+```{r echo=FALSE, warning=FALSE}
+hh_data <- readxl::read_excel("data/HH.xlsx", col_types = "text") 
+hh_data %>% 
+  downloadthis::download_this(
+    output_name = "MSNA_2022_Poland_Dummy_HH_data",
+    output_extension = ".xlsx",
+    button_label = "Download HH Data",
+    button_type = "warning"
+  )
+```
+
+```{r echo=FALSE, warning=FALSE}
+ind_data <- readxl::read_excel("data/Ind.xlsx", col_types = "text") 
+ind_data %>% 
+  downloadthis::download_this(
+    output_name = "MSNA_2022_Poland_Dummy_IND_data",
+    output_extension = ".xlsx",
+    button_label = "Download Ind Data",
+    button_type = "warning"
+  )
+```
+
+You should create an R script that will include all the answers to the requirements below.
+
+Here is what you need to work on:
+
+* Create a new column in the HH dataframe that include the number of HH members.
+* Create a new column in the HH dataframe that include the number of children (below 18) in each HH members.
+* Create a new data frame to count how many HHs have animals and how many don't (`hh_animal` column).
+* Create a new data frame to calculate the average of hh monthly rent and utilities payment in both Outside and Inside CCs. (Hint, you must use all `select()`, `mutate()`, `rowSums()`, `group_by()`, and `summarise()`)
+
+Once you finished with your task, please share it with the senior data team in your mission for review. 
+
+I hope you enjoyed the journey.
+
+# Extra Self Learning
+
+If you are interested to even take it to another level of self learning R, <a href="https://swirlstats.com/">SWIRL</a> is a fantastic package that teaches you interactively, at your own pace, and directly in the R console how to use R and do data research.
+
+<strong>Testimony</strong>: Md. Mehedi Khan (Data Specialist in HQ) have learned R using this package. So, you can be the next. 
+
+> install.packages("swirl")
+
+> library(swirl)
+
+Once installed, go to console and write `swirl()` and begin your learning journey. 

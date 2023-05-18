@@ -1,0 +1,13 @@
+name: Quizzes
+title: Quizzes
+username:
+account: abrahamazar
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8946855
+bundleId: 7133341
+url: https://abrahamazar.shinyapps.io/Quizzes/
+when: 1682433969.82016
+lastSyncTime: 1682433969.82018
+asMultiple: FALSE
+asStatic: FALSE

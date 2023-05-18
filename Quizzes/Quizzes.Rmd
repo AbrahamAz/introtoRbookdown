@@ -1,0 +1,146 @@
+---
+title: "Introduction to R (Basic - Intermediate)"
+author: "Abraham Azar (abraham.azar@impact-initiatives.org)"
+output: 
+  learnr::tutorial:
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Intro to R Quiz
+
+<em>Please ensure that you complete first the learning section before completing the quiz.</em>
+
+```{r quiz}
+quiz(caption = "Some questions to verify that you understand the Intro to R Section:",
+  question("How many quadrants the User Interface of R Studio is split into",
+    answer("1"),
+    answer("2"),
+    answer("3"),
+    answer("4", correct = T),
+    random_answer_order = T
+  ),
+  question("What is the correct way to install a package in R?",
+    answer("install.package(' ')"),
+    answer("install.packages(' ')", correct = T),
+    answer('install.packages(" ")', correct = T),
+    answer("install.packages()"), 
+    random_answer_order = T
+  ),
+  question("What is the right order",
+    answer("Load Libraries, Load Data, Manipulate Data, Export Data", correct = TRUE),
+    answer("Load Libraries, Manipulate Data, Load Data, Export Data"),
+    answer("Load Data, Load Libraries, Export Data, Manipulate Data"),
+    answer("Export Data, Manipulate Data, Load Data, Load Libraries"),
+    random_answer_order = T
+  ),
+  question("What symbole to use to add comment?",
+    answer("`###`", correct = T),
+    answer("`##`", correct = T),
+    answer("`#`", correct = T),
+    answer("`//`"),
+    random_answer_order = T
+  ),
+  question("What is a good example of writing a variable in R?",
+    answer("mle18"),
+    answer("male_under_18", correct = T),
+    answer("maleunder18"),
+    answer("maleUnder18", correct = T, message = "maleUnder18 it is correct, and it is called the CamelCase.")
+  ),
+  question("Is R Case Sensitive?",
+    answer("True", correct = T),
+    answer("False")
+  )
+)
+```
+
+## Basics of R Quiz
+
+<em>Please ensure that you complete first the learning section before completing the quiz.</em>
+
+```{r quiz2}
+quiz(caption = "Some questions to verify that you understand the Basics of R Section:",
+  question_text("Please enter the right class type of `46`.",
+    answer("numeric", correct = T),
+    answer("integer", message = "If it was 46L, then it is integer."),
+    answer("character", message = "If it was inside ' '."),
+    answer("boolean", message = "It is not a TRUE or FALSE."),
+    random_answer_order = T
+  ),
+  question_text("Please enter the right class type of 'string'.",
+    answer("numeric", message = "It is not a numeric value."),
+    answer("integer", message = "It is not an integer"),
+    answer("character", correct = T),
+    answer("boolean", message = "It is not a TRUE or FALSE."),
+    random_answer_order = T
+  ),
+  question_text("Please enter the right class type of '46L'.",
+    answer("numeric", message = "It is not a numeric value because it is inside ' '."),
+    answer("integer", message = "It is not an integer because it is inside ' '."),
+    answer("character", correct = T),
+    answer("boolean", message = "It is not a TRUE or FALSE."),
+    random_answer_order = T
+  ),
+  question_text("Please enter the right output of 46 < 35.",
+    answer("TRUE", message = "Is 46 less than 35?"),
+    answer("FALSE", correct = T),
+    answer("true", message = "Is 46 less than 35?"),
+    answer("false", correct = T),
+    random_answer_order = T
+  ),
+  question("What is the operator that represent the 'not equal'?",
+    answer("`<>`"),
+    answer("`!=`", correct = T),
+    answer("`=!`"),
+    answer("`><`"),
+    random_answer_order = T
+  ),
+  question("How do you concatenate two strings together?",
+    answer("Using the + sign"),
+    answer("Using the `paste()` or `paste0()` functions.", correct = T),
+    answer("Using the base function `concat()`"),
+    answer("Using the base function `concatenate()`")
+  ),
+  question("What index items in R start with",
+    answer("0"),
+    answer("1", correct = T)
+  ),
+  question("How to column in a data frame?",
+    answer("dataframe[column]", correct = T),
+    answer("dataframe[['column_name']]", correct = T),
+    answer("dataframe$column", correct=T),
+    answer("dataframe$[column]")
+  ),
+  question_text("What is the output of the following condition?\n
+    num_one <- 10
+    num_two <- 15
+    if (num_one == num_two){
+         print('Both numbers are equal')
+    } else if (num_one > num_two) {
+         print('First number is bigger than the second number')
+    } else {
+         print('Second number is bigger than the first number')
+    }
+        ",
+    answer("Both numbers are equal", message = "Are you sure?"),
+    answer("First number is bigger than the second number", message = "Are you sure?"),
+    answer("Second number is bigger than the first number", correct = T)
+  ),
+  question_text("What is the output of the following condition?\n
+    num_one <- 10
+    num_two <- 15
+    num_three <- 10
+    if (num_one > num_two | num_two > num_three & num_three == num_one ){
+         print('True')
+    } else{
+         print('False')
+    }",
+    answer("False", message = "Are you sure?"),
+    answer("True", correct = T)
+  )
+)
+```
